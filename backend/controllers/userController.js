@@ -3,17 +3,19 @@ const userModel = require("../models/userModel");
 const UserModel= require("../models/userModel");
 
 const userRegistration=async(req,res)=>{
-    const {name, email, password} = req.body;
+    const {name, email, password,number} = req.body;
     const empdata=await UserModel.create({
         name:name,
         email:email,
-        password:password
+        password:password,
+        number:number
     })
 
     // console.log("succesfully registered!");
     res.send("succesfully registered!");
 }
 
+<<<<<<< HEAD
 
 const userLogin=async(req, res)=>{
     const {email, password} = req.body;
@@ -34,6 +36,9 @@ const userLogin=async(req, res)=>{
         }
       }
 }
+=======
+// ankita
+>>>>>>> e5a0c7358f5a33ce3182605ff184b95e70779512
 
 
 module.exports={
