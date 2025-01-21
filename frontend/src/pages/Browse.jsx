@@ -18,7 +18,7 @@ const Browse = () => {
     },[])
     return (
         <div>
-            <Navbar />
+            <Topmenu />
             <div >
                 <h1 >Search Results ({allJobs.length})</h1>
                 <div >
