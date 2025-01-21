@@ -11,9 +11,9 @@ const App=()=>{
     <Routes>
     <Route path="/" element={<Layout/>}>
     <Route index element={<Home/>}/>
+    <Route path="home" element={<Home/>}/>
     <Route path="login" element={<Login/>}/>
     <Route path="registration" element={<Signup/>}/>
-
       </Route>
     </Routes>
     </BrowserRouter>

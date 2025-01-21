@@ -11,6 +11,10 @@ email:{
 password:{
     type:String,
     require:true
+},
+number:{
+    type:Number,
+    require:true
 }
 
 
