@@ -16,8 +16,8 @@ const Topmenu=()=>{
           
           <Nav className="ms-auto" style={{ alignItems: 'center' }}>
             <Nav.Link as={Link} to="home">Home</Nav.Link>
-            <Nav.Link as={Link} to="home">jobs</Nav.Link>
-            <Nav.Link as={Link} to="home">browse</Nav.Link>
+            <Nav.Link as={Link} to="jobs">jobs</Nav.Link>
+            <Nav.Link as={Link} to="browse">browse</Nav.Link>
            
            {
               !user ?
