@@ -15,30 +15,7 @@ const userRegistration=async(req,res)=>{
     res.send("succesfully registered!");
 }
 
-<<<<<<< HEAD
-// ankita
-=======
 
-const userLogin=async(req, res)=>{
-    const {email, password} = req.body;
-    const userdata= await userModel.find({email:email});
-      if (userdata.length<1)
-      {
-        res.status(401).send("Invalid Email!")
-      }
-      else
-      {
-        if (userdata[0].password!=password)
-        {
-            res.status(401).send("Invalid Credentials!");
-        }
-        else
-        {
-            res.status(200).send(userdata);
-        }
-      }
-}
->>>>>>> 423660e2759b1326908be27938c81b8532b89fc0
 
 
 module.exports={
