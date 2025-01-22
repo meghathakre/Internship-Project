@@ -30,31 +30,6 @@ const Signup = () => {
       <div className="signup-card">
         <h2 className="signup-title">Sign Up</h2>
         <Form>
-<<<<<<< HEAD
-      
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="disabledTextInput">Enter Name</Form.Label>
-          <Form.Control id="disabledTextInput" placeholder="enter name"  name="name" value={input.name} onChange={handleInput}/>
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="disabledTextInput">Enter Email</Form.Label>
-          <Form.Control id="disabledTextInput" placeholder="Enter email" name="email" value={input.email} onChange={handleInput}/>
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="disabledTextInput">Enter Password</Form.Label>
-          <Form.Control id="disabledTextInput" placeholder="enter password" name="password" value={input.password} onChange={handleInput}/>
-        </Form.Group>
-        
-
-        <Button onClick={handleSubmit}>Submit</Button>
-     
-    </Form>
-        </>
-    )
-  }
-
-export default  Signup;
-=======
           <Form.Group className="mb-3">
             <Form.Label>Enter Name</Form.Label>
             <Form.Control 
@@ -119,4 +94,3 @@ export default  Signup;
 };
 
 export default Signup;
->>>>>>> e5a0c7358f5a33ce3182605ff184b95e70779512
