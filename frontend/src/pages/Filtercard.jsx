@@ -31,7 +31,7 @@ const FilterCard = () => {
     return (
         <div >
             <h1 >Filter Jobs</h1>
-            <hr  />
+            <hr />
             <RadioGroup value={selectedValue} onValueChange={changeHandler}>
                 {
                     fitlerData.map((data, index) => (
