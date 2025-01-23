@@ -1,63 +1,281 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from './shared/Navbar'
-import FilterCard from './FilterCard'
-import Job from './Job';
-import { useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import React from 'react';
+import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
+
+const Job=()=>{
+const [catData, setCatData]= useState("");
+const [priceData, setPriceData]=useState("");
+const [displayState, setDisplayState]= useState(true)
+
+
+const [mydata, setMydata]=useState([]);
+
+const [pricemydata, setPriceMydata]=useState([]);
+
+const dispatch= useDispatch();
+
+const loadData=()=>{
+   let api="http://localhost:8000/jobs";
+   axios.get(api).then((res)=>{
+    setMydata(res.data);
+   })
+}
+
+useEffect(()=>{
+  loadData();
+}, [])
+
+
+// const addDataToCart=(id, name, cate, brand, price, desc, images)=>{
+//      dispatch(addcartData({id:id, name:name, category:cate, 
+//       brand:brand, price:price, description:desc,images:images, qnty:1}))
+// }
 
 
 
-const Jobs = () => {
-    const { allJobs, searchedQuery } = useSelector(store => store.job);
-    const [filterJobs, setFilterJobs] = useState(allJobs);
 
-    useEffect(() => {
-        if (searchedQuery) {
-            const filteredJobs = allJobs.filter((job) => {
-                return job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    job.location.toLowerCase().includes(searchedQuery.toLowerCase())
-            })
-            setFilterJobs(filteredJobs)
-        } else {
-            setFilterJobs(allJobs)
+
+
+
+
+const ans=mydata.map((key)=>{
+   return(
+    <>
+     <Card style={{ width: '250px', marginTop:"20px" }}>
+      <Card.Img variant="top" src={key.images} />
+      <Card.Body>
+        <Card.Title> {key.name} </Card.Title>
+        <h4  style={{color:"blue", fontSize:"14px"}}>  Brand : { key.brand} 
+
+         {" "}  For - {key.category}
+        </h4>
+        <Card.Text>
+           {key.description}
+        </Card.Text>
+         <h4 style={{color:"red", fontSize:"16px"}}> Price : {key.price} </h4> 
+        <Button variant="primary" 
+        onClick={()=>{addDataToCart(key.id, key.name, key.category, key.brand, key.price, key.description, key.images)}}>Add To Cart</Button>
+      </Card.Body>
+    </Card>
+    
+    </>
+   )
+})
+
+
+
+ const ans1=pricemydata.map((key)=>{
+    
+  if (priceData==2000)
+  {
+      if (key.price>0 && key.price<2001 )
+      {
+        return(
+          <>
+           <Card style={{ width: '250px', marginTop:"20px" }}>
+            <Card.Img variant="top" src={key.images} />
+            <Card.Body>
+              <Card.Title> {key.name} </Card.Title>
+              <h4  style={{color:"blue", fontSize:"14px"}}>  Brand : { key.brand} 
+       
+               {" "}  For - {key.category}
+              </h4>
+              <Card.Text>
+                 {key.description}
+              </Card.Text>
+               <h4 style={{color:"red", fontSize:"16px"}}> Price : {key.price} </h4> 
+              <Button variant="primary" 
+              onClick={()=>{addDataToCart(key.id, key.name, key.category, key.brand, key.price, key.description, key.images)}}>Add To Cart</Button>
+            </Card.Body>
+          </Card>
+          
+          </>
+         )
+       
+      }
+    }
+
+    if (priceData==4000)
+      {
+          if (key.price>2000 && key.price<4001 )
+          {
+            return(
+              <>
+               <Card style={{ width: '250px', marginTop:"20px" }}>
+                <Card.Img variant="top" src={key.images} />
+                <Card.Body>
+                  <Card.Title> {key.name} </Card.Title>
+                  <h4  style={{color:"blue", fontSize:"14px"}}>  Brand : { key.brand} 
+           
+                   {" "}  For - {key.category}
+                  </h4>
+                  <Card.Text>
+                     {key.description}
+                  </Card.Text>
+                   <h4 style={{color:"red", fontSize:"16px"}}> Price : {key.price} </h4> 
+                  <Button variant="primary" 
+                  onClick={()=>{addDataToCart(key.id, key.name, key.category, key.brand, key.price, key.description, key.images)}}>Add To Cart</Button>
+                </Card.Body>
+              </Card>
+              
+              </>
+             )
+           
+          }
         }
-    }, [allJobs, searchedQuery]);
 
-    return (
-        <div>
-            <Navbar />
-            <div >
-                <div >
-                    <div >
-                        <FilterCard />
-                    </div>
-                    {
-                        filterJobs.length <= 0 ? <span>Job not found</span> : (
-                            <div >
-                                <div >
-                                    {
-                                        filterJobs.map((job) => (
-                                            <motion.div
-                                                initial={{ opacity: 0, x: 100 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                exit={{ opacity: 0, x: -100 }}
-                                                transition={{ duration: 0.3 }}
-                                                key={job?._id}>
-                                                <Job job={job} />
-                                            </motion.div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                        )
-                    }
-                </div>
+
+        if (priceData==5000)
+          {
+              if (key.price>4000 && key.price<5001 )
+              {
+                return(
+                  <>
+                   <Card style={{ width: '250px', marginTop:"20px" }}>
+                    <Card.Img variant="top" src={key.images} />
+                    <Card.Body>
+                      <Card.Title> {key.name} </Card.Title>
+                      <h4  style={{color:"blue", fontSize:"14px"}}>  Brand : { key.brand} 
+               
+                       {" "}  For - {key.category}
+                      </h4>
+                      <Card.Text>
+                         {key.description}
+                      </Card.Text>
+                       <h4 style={{color:"red", fontSize:"16px"}}> Price : {key.price} </h4> 
+                      <Button variant="primary" 
+                      onClick={()=>{addDataToCart(key.id, key.name, key.category, key.brand, key.price, key.description, key.images)}}>Add To Cart</Button>
+                    </Card.Body>
+                  </Card>
+                  
+                  </>
+                 )
+               
+              }
+            }
+    
+            if (priceData==6000)
+              {
+                  if (key.price>5000)
+                  {
+                    return(
+                      <>
+                       <Card style={{ width: '250px', marginTop:"20px" }}>
+                        <Card.Img variant="top" src={key.images} />
+                        <Card.Body>
+                          <Card.Title> {key.name} </Card.Title>
+                          <h4  style={{color:"blue", fontSize:"14px"}}>  Brand : { key.brand} 
+                   
+                           {" "}  For - {key.category}
+                          </h4>
+                          <Card.Text>
+                             {key.description}
+                          </Card.Text>
+                           <h4 style={{color:"red", fontSize:"16px"}}> Price : {key.price} </h4> 
+                          <Button variant="primary" 
+                          onClick={()=>{addDataToCart(key.id, key.name, key.category, key.brand, key.price, key.description, key.images)}}>Add To Cart</Button>
+                        </Card.Body>
+                      </Card>   
+                      </>
+                     )
+                   
+                  }
+                }
+  }
+)
+
+      
+
+
+
+const handleSubCategory=()=>{
+    let api=`http://localhost:3000/product/?category=${catData}`;
+    axios.get(api).then((res)=>{
+     setMydata(res.data);
+    })
+    setDisplayState(true);
+}
+
+const handleSubPrice=()=>
+{
+  let api="http://localhost:3000/product";
+  axios.get(api).then((res)=>{
+    setPriceMydata(res.data);
+  })
+  setDisplayState(false);
+}
+console.log(pricemydata);
+
+    return(
+        <>
+          <div id="shoppage">
+            <div style={{width:"350px", paddingLeft:"20px",paddingTop:"20px", fontSize:"11px", fontWeight:"bold"}}>       
+             <h5> Location</h5> 
+              <br/>
+              <input type="radio" value="rings" name="cat" onChange={(e)=>{setCatData(e.target.value)}} />Hydrabad
+              <br/>
+              <input type="radio" value="bengles" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Mumbai
+              <br/>
+              <input type="radio" value="earings" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Delhi
+              <input type="radio" value="earings" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Banglore
+              <input type="radio" value="earings" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Chennai
+             <br/>
+             <Button size="sm" onClick={handleSubCategory}>Search</Button>
+             <br/> <br/>
+             <h5> Industry</h5> 
+             
+             <input type="radio" value="2000"  name="price"
+             onChange={(e)=>{setPriceData(e.target.value)}}/> Frontend Developer
+             <br/>
+             <input type="radio" value="4000"  name="price"
+             onChange={(e)=>{setPriceData(e.target.value)}} /> Backend Developer
+             <br/>
+             <input type="radio" value="5000"  name="price" 
+             onChange={(e)=>{setPriceData(e.target.value)}} /> Fullstack developer
+             <br/>
+             <input type="radio" value="6000"  name="price" 
+             onChange={(e)=>{setPriceData(e.target.value)}} /> sales executive
+             <br/>
+             
+             <Button size="sm" onClick={handleSubPrice}>Search</Button>
+
+
             </div>
+            <div>  
 
 
-        </div>
+
+
+
+
+
+            <div id="proHeading">
+        <h1> </h1>
+       </div>
+       
+       <div id="homeProduct">
+           
+            {displayState?ans:ans1}
+                 
+       </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+        </>
     )
 }
 
-export default Jobs;
+export default Job;

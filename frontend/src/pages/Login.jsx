@@ -1,35 +1,58 @@
 import { useState } from "react"
-import { useNavigate,useDispatch,useSelector } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 
+
+
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const {loading}=useSelector((state)=>{state.auth})
-    const navigate = useNavigate();
-    const dispatch=useDispatch();
+//     const [email, setEmail] = useState("");
+//     const [password, setPassword] = useState("");
+//    // const loading=useSelector((state)=>{state.auth})
+//     const navigate = useNavigate();
+//     const dispatch=useDispatch();
 
-    const handleSubmit = async () => {
+//     const handleSubmit = async () => {
 
-        try {
-            dispatch(setLoding(false))
-            let api = "http://localhost:8000/users/userlogin"
-            const res = await axios.post(api, { email: email, password: password });
-            console.log(res.data);
-            localStorage.setItem("name", res.data[0].name);
-            localStorage.setItem("email", res.data[0].email);
-            navigate("/home");
-        } catch (error) {
-            alert(error.response.data)
-        }finally{
-            dispatch(setLoding(true))
+//         try {
+//             dispatch(setLoding(false))
+//             let api = "http://localhost:8000/users/userlogin"
+//             const res = await axios.post(api, { email: email, password: password });
+//             console.log(res.data);
+//             localStorage.setItem("name", res.data[0].name);
+//             localStorage.setItem("email", res.data[0].email);
+//             navigate("/home");
+//         } catch (error) {
+//             alert(error.response.data)
+//         }finally{
+//             dispatch(setLoding(true))
 
-        }
+//         }
+//     }
+
+const [email, setEmail] =useState("");
+const [password, setPassword] =useState("");
+const navigate= useNavigate();
+
+
+const handleSubmit=async()=>{
+
+
+      try {
+        let api="http://localhost:8000/users/userlogin";
+        const res= await axios.post(api, {email:email, password:password});
+        console.log(res.data);
+        localStorage.setItem("name", res.data[0].name);
+        localStorage.setItem("email", res.data[0].email);
+        navigate("/home"); 
+      } catch (error) {
+        alert(error.response.data);
+      }
     }
+
     return (
         <>
 
@@ -47,7 +70,7 @@ const Login = () => {
                             <Form.Label>Enter Password</Form.Label>
                             <Form.Control type="password" placeholder="Enter password" name="password"
                                 value={password}
-                                onChange={(e) => { setEmail(e.target.value) }} />
+                                onChange={(e) => { setPassword(e.target.value) }} />
                         </Form.Group>
 
 

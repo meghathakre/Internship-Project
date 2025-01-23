@@ -1,36 +1,34 @@
 
-
 const UserModel= require("../models/userModel");
 
 const userRegistration=async(req,res)=>{
     const {name, email, password,number} = req.body;
-    const empdata=await UserModel.create({
+    const userdata=await UserModel.create({
         name:name,
         email:email,
         password:password,
         number:number
     })
 
-    // console.log("succesfully registered!");
     res.send("succesfully registered!");
 }
 
 const userLogin=async(req, res)=>{
     const {email, password} = req.body;
-    const empdata= await EmpModel.find({email:email});
-      if (empdata.length<1)
+    const userdata= await UserModel.find({email:email});
+      if (userdata.length<1)
       {
         res.status(401).send("Invalid Email!")
       }
       else
       {
-        if (empdata[0].password!=password)
+        if (userdata[0].password!=password)
         {
             res.status(401).send("Invalid Credentials!");
         }
         else
         {
-            res.status(200).send(empdata);
+            res.status(200).send(userdata);
         }
       }
 }

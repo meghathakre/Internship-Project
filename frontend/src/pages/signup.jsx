@@ -5,24 +5,39 @@ import { message } from "antd";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import '../css/Signup.css'; 
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [input, setInput] = useState({});
+  // const [input, setInput] = useState({});
 
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setInput((values) => ({ ...values, [name]: value }));
-  };
+  // const handleInput = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput((values) => ({ ...values, [name]: value }));
+  // };
 
-  const handleSubmit = () => {
-    const api = "http://localhost:8000/users/userregistration";
-    axios.post(api, input).then((res) => {
-        message.success("You are registered successfully!");
-      }).catch((err) => {
-        message.error("Registration failed. Please try again.");
-      });
-  };
-
+  // const handleSubmit = () => {
+  //   const api = "http://localhost:8000/users/userregistration";
+  //   axios.post(api, input).then((res) => {
+  //       message.success("You are registered successfully!");
+  //     }).catch((err) => {
+  //       message.error("Registration failed. Please try again.");
+  //     });
+  // };
+  const [input, setInput] =useState({});
+  const navigate = useNavigate();
+  const handleInput=(e)=>{
+     let name=e.target.name;
+     let value=e.target.value;
+     setInput(values=>({...values, [name]:value}));
+  }
+  const handleSubmit=()=>{
+   let api="http://localhost:8000/users/userregistration";
+    axios.post(api, input).then((res)=>{
+       
+         message.success("You are succesfully Registered!");
+         navigate(`/login`)
+    })
+  }
   return (
     <div className="signup-container">
       <div className="signup-card">
