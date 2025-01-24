@@ -35,6 +35,7 @@ const Login = () => {
 
 const [email, setEmail] =useState("");
 const [password, setPassword] =useState("");
+const [role, setRole] = useState("")
 const navigate= useNavigate();
 
 
@@ -47,7 +48,13 @@ const handleSubmit=async()=>{
         console.log(res.data);
         localStorage.setItem("name", res.data[0].name);
         localStorage.setItem("email", res.data[0].email);
-        navigate("/home"); 
+        
+        if (role === "Student") {
+            navigate("/home");
+          } else if (role === "Recruiter") {
+            navigate("/insert");
+          }
+          
       } catch (error) {
         alert(error.response.data);
       }
@@ -75,8 +82,8 @@ const handleSubmit=async()=>{
 
 
                         <div style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
-                            <Form.Check type="radio" label="Student" name="role" />
-                            <Form.Check type="radio" label="Recruiter" name="role" />
+                            <Form.Check type="radio" label="Student" name="role"  value="Student" onChange={(e) => setRole(e.target.value)}/>
+                            <Form.Check type="radio" label="Recruiter" name="role"  value="Recruiter" onChange={(e) => setRole(e.target.value)}/>
                         </div>
 
                         <Button onClick={handleSubmit} className="signup-button" > Submit</Button>
