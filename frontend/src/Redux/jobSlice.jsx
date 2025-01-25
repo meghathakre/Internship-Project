@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-
+//jobslice
 const jobSlice=createSlice({
     name:"",
     initialState:{

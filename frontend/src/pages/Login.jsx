@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from 'react-bootstrap/Spinner';
 import { setLoading } from "../Redux/authSlice";
@@ -10,6 +11,8 @@ import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
+
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -35,8 +38,58 @@ const Login = () => {
         } finally {
             dispatch(setLoading(true))
 
-        }
+//     const [email, setEmail] = useState("");
+//     const [password, setPassword] = useState("");
+//    // const loading=useSelector((state)=>{state.auth})
+//     const navigate = useNavigate();
+//     const dispatch=useDispatch();
+
+//     const handleSubmit = async () => {
+
+//         try {
+//             dispatch(setLoding(false))
+//             let api = "http://localhost:8000/users/userlogin"
+//             const res = await axios.post(api, { email: email, password: password });
+//             console.log(res.data);
+//             localStorage.setItem("name", res.data[0].name);
+//             localStorage.setItem("email", res.data[0].email);
+//             navigate("/home");
+//         } catch (error) {
+//             alert(error.response.data)
+//         }finally{
+//             dispatch(setLoding(true))
+
+//         }
+//     }
+
+const [email, setEmail] =useState("");
+const [password, setPassword] =useState("");
+const [role, setRole] = useState("")
+const navigate= useNavigate();
+
+
+
+const handleSubmit=async()=>{
+
+
+      try {
+        let api="http://localhost:8000/users/userlogin";
+        const res= await axios.post(api, {email:email, password:password});
+        console.log(res.data);
+        localStorage.setItem("name", res.data[0].name);
+        localStorage.setItem("email", res.data[0].email);
+        
+        if (role === "Student") {
+            navigate("/home");
+          } else if (role === "Recruiter") {
+            navigate("/insert");
+          }
+          
+      } catch (error) {
+        alert(error.response.data);
+      }
     }
+
     return (
         <>
 
@@ -54,13 +107,13 @@ const Login = () => {
                             <Form.Label>Enter Password</Form.Label>
                             <Form.Control type="password" placeholder="Enter password" name="password"
                                 value={password}
-                                onChange={(e) => { setEmail(e.target.value) }} />
+                                onChange={(e) => { setPassword(e.target.value) }} />
                         </Form.Group>
 
 
                         <div style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
-                            <Form.Check type="radio" label="Student" name="role" />
-                            <Form.Check type="radio" label="Recruiter" name="role" />
+                            <Form.Check type="radio" label="Student" name="role"  value="Student" onChange={(e) => setRole(e.target.value)}/>
+                            <Form.Check type="radio" label="Recruiter" name="role"  value="Recruiter" onChange={(e) => setRole(e.target.value)}/>
                         </div>
 
                         <Button onClick={handleSubmit} className="signup-button" > Submit</Button>

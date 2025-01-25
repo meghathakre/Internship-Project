@@ -1,6 +1,7 @@
 const express = require("express");
 const route= express.Router();
 
+// route.post("/jobs",jobController.findjob)
 
 
-export default route;
+module.exports=route;
