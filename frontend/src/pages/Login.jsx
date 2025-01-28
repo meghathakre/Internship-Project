@@ -1,11 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux'
-import Spinner from 'react-bootstrap/Spinner';
-import { setLoading } from "../Redux/authSlice";
-
-
 import axios from "axios";
 
 import Button from 'react-bootstrap/Button';
@@ -15,53 +10,6 @@ import { Link } from 'react-router-dom';
 
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const loading = useSelector((state) => { state.auth.loading })
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-
-
-    const handleSubmit = async () => {
-
-        try {
-            dispatch(setLoading(false))
-            let api = "http://localhost:8000/users/userlogin"
-            const res = await axios.post(api, { email: email, password: password });
-            console.log(res.data);
-            localStorage.setItem("name", res.data[0].name);
-            localStorage.setItem("email", res.data[0].email);
-            navigate("/home");
-        } catch (error) {
-            alert(error.response.data)
-        } finally {
-            dispatch(setLoading(true))
-
-//     const [email, setEmail] = useState("");
-//     const [password, setPassword] = useState("");
-//    // const loading=useSelector((state)=>{state.auth})
-//     const navigate = useNavigate();
-//     const dispatch=useDispatch();
-
-//     const handleSubmit = async () => {
-
-//         try {
-//             dispatch(setLoding(false))
-//             let api = "http://localhost:8000/users/userlogin"
-//             const res = await axios.post(api, { email: email, password: password });
-//             console.log(res.data);
-//             localStorage.setItem("name", res.data[0].name);
-//             localStorage.setItem("email", res.data[0].email);
-//             navigate("/home");
-//         } catch (error) {
-//             alert(error.response.data)
-//         }finally{
-//             dispatch(setLoding(true))
-
-//         }
-//     }
-
 const [email, setEmail] =useState("");
 const [password, setPassword] =useState("");
 const [role, setRole] = useState("")
@@ -70,8 +18,6 @@ const navigate= useNavigate();
 
 
 const handleSubmit=async()=>{
-
-
       try {
         let api="http://localhost:8000/users/userlogin";
         const res= await axios.post(api, {email:email, password:password});
@@ -79,11 +25,16 @@ const handleSubmit=async()=>{
         localStorage.setItem("name", res.data[0].name);
         localStorage.setItem("email", res.data[0].email);
         
-        if (role === "Student") {
-            navigate("/home");
-          } else if (role === "Recruiter") {
-            navigate("/insert");
-          }
+        // if (role === "Student") {
+        //     navigate("/home");
+        //   } else if (role === "Recruiter") {
+        //     navigate("/insert");
+        //   }
+alert("user login sucessfuly")
+if(res.data.success){
+    navigate("/token");
+}
+
           
       } catch (error) {
         alert(error.response.data);
@@ -92,7 +43,6 @@ const handleSubmit=async()=>{
 
     return (
         <>
-
             <div className="signup-container">
                 <div className="signup-card">
                     <h2 className="signup-title">login</h2>
@@ -121,14 +71,11 @@ const handleSubmit=async()=>{
                         <div className="signup-login">
                             <span>Don't have an account? <Link to="/registration">Signup</Link></span>
                         </div>
-                        {
-                            loading ? <Button className="w-full my-4"> <Spinner animation="border" /> Please wait </Button> : <Button type="submit" className="w-full my-4">Login</Button>
-                        }
-                        <span className='text-sm'>Don't have an account? <Link to="/signup" className='text-blue-600'>Signup</Link></span>
                     </Form>
                 </div>
             </div>
         </>
     )
 }
+    
 export default Login;
