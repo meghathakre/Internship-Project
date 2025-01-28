@@ -9,29 +9,6 @@ import { Link } from 'react-router-dom';
 
 
 const Login = () => {
-//     const [email, setEmail] = useState("");
-//     const [password, setPassword] = useState("");
-//    // const loading=useSelector((state)=>{state.auth})
-//     const navigate = useNavigate();
-//     const dispatch=useDispatch();
-
-//     const handleSubmit = async () => {
-
-//         try {
-//             dispatch(setLoding(false))
-//             let api = "http://localhost:8000/users/userlogin"
-//             const res = await axios.post(api, { email: email, password: password });
-//             console.log(res.data);
-//             localStorage.setItem("name", res.data[0].name);
-//             localStorage.setItem("email", res.data[0].email);
-//             navigate("/home");
-//         } catch (error) {
-//             alert(error.response.data)
-//         }finally{
-//             dispatch(setLoding(true))
-
-//         }
-//     }
 
 const [email, setEmail] =useState("");
 const [password, setPassword] =useState("");

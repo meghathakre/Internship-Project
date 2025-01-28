@@ -4,7 +4,8 @@ var bodyParser = require('body-parser')
 const mongoose = require("mongoose");
 const cors = require('cors');
 const userRoute=require("./routes/userRoutes");
-const jobRoutes=require("./routes/jobRoute");
+
+const comRoute=require("./routes/companyRoute")
 require("dotenv").config();
 
 mongoose.connect(process.env.DBCONECTION).then(()=>{
@@ -15,7 +16,7 @@ app.use(bodyParser.json())
 app.use(cors());
 
 app.use("/users", userRoute); 
-app.use("/jobs", jobRoutes);
+app.use("/company",comRoute);
 
  const port=process.env.PORT || 3000
 

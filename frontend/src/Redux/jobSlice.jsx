@@ -1,15 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-//jobslice
-const jobSlice=createSlice({
-    name:"",
-    initialState:{
 
+
+
+const jobSlice = createSlice({
+  name: "job",
+  initialState : {
+    name: "",
+    description: "",
+    website: "",
+    location: "",
+    logo: null,
+  },
+  reducers: {
+    updateField: (state, action) => {
+      const { field, value } = action.payload;
+      state[field] = value;
     },
-    reducers:{
+    resetForm: () => initialState,
+  },
+});
 
-    }
-})
-export const {}= jobSlice.actions;
-export default  jobSlice.reducer;
+export const { updateField, resetForm } = jobSlice.actions;
+
+export default jobSlice.reducer;

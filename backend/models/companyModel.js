@@ -1,5 +1,8 @@
 const mongoose =require("mongoose");
 const companySchema=new mongoose.Schema({
+   tittle:{
+    type:String
+   },
     name:{
         type:String,
         required:true,
@@ -8,20 +11,18 @@ const companySchema=new mongoose.Schema({
     description:{
         type:String, 
     },
-    website:{
-        type:String 
-    },
+   
     location:{
         type:String 
     },
     logo:{
         type:String 
-    },
-    userId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        required:true
     }
+    // userId:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'User',
+    //     required:true
+    // }
 
-},{timestamps:true})
+})
 module.exports=mongoose.model("company", companySchema)

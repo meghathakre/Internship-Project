@@ -221,7 +221,9 @@ console.log(pricemydata);
               <input type="radio" value="bengles" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Mumbai
               <br/>
               <input type="radio" value="earings" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Delhi
+              <br/>
               <input type="radio" value="earings" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Banglore
+              <br/>
               <input type="radio" value="earings" name="cat"  onChange={(e)=>{setCatData(e.target.value)}} /> Chennai
              <br/>
              <Button size="sm" onClick={handleSubCategory}>Search</Button>
