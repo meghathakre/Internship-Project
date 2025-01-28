@@ -8,7 +8,13 @@ const userRoute=require("./routes/userRoutes");
 const comRoute=require("./routes/companyRoute")
 require("dotenv").config();
 
-mongoose.connect(process.env.DBCONECTION).then(()=>{
+mongoose.connect(process.env.DBCONECTION,
+    {
+        useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tlsInsecure: true
+    }).then(()=>{
+    
     console.log("DB succesfullly Connected")
 })
 app.use(bodyParser.urlencoded({ extended: false }))

@@ -1,4 +1,6 @@
 
+
+
 const UserModel= require("../models/userModel");
 
 const userRegistration=async(req,res)=>{
@@ -12,6 +14,8 @@ const userRegistration=async(req,res)=>{
 
     res.send("succesfully registered!");
 }
+
+
 
 const userLogin=async(req, res)=>{
     const {email, password} = req.body;
@@ -37,5 +41,6 @@ const userLogin=async(req, res)=>{
 module.exports={
     userRegistration,
     userLogin
+    
     
 }
