@@ -20,14 +20,14 @@ const CompanyForm = () => {
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
-      logo: e.target.files[0], // Save the selected file
+      logo: e.target.files[0], 
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
-    // You can now send the formData to a server or process it further
+    
   };
 
   return (
