@@ -8,6 +8,7 @@ import CompanyForm from "./pages/CompanyForm";
 import Catagory from "./pages/Category";
 import LetestJob from "./pages/LetestJob";
 import Browse from "./pages/Browse";
+import Profile from "./pages/Profile";
 
 const App=()=>{
   return(
@@ -24,6 +25,7 @@ const App=()=>{
     <Route path="category" element={<Catagory/>}/>
     <Route path="letestjob" element={<LetestJob/>}/>
     <Route path="browse" element={<Browse/>}/>
+    <Route path="profile" element={<Profile/>}/>
       </Route>
     </Routes>
     </BrowserRouter>

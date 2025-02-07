@@ -6,7 +6,7 @@ const LetestJob=()=>{
         <>
         <div>
             <h1>Latest & top Job opnings</h1>
-            <div>
+            {/* <div>
             {
                 job.slice(0,6).map((iteme,index)=>{
                     <Card style={{ width: '18rem' }}>
@@ -29,7 +29,7 @@ const LetestJob=()=>{
 
                 })
             }
-            </div>
+            </div> */}
            
         </div>
          
