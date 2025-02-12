@@ -8,35 +8,38 @@ import '../css/Signup.css';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  // const [input, setInput] = useState({});
-
-  // const handleInput = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput((values) => ({ ...values, [name]: value }));
-  // };
-
-  // const handleSubmit = () => {
-  //   const api = "http://localhost:8000/users/userregistration";
-  //   axios.post(api, input).then((res) => {
-  //       message.success("You are registered successfully!");
-  //     }).catch((err) => {
-  //       message.error("Registration failed. Please try again.");
-  //     });
-  // };
   const [input, setInput] =useState({});
+  const [uploadImage, setUploadImage]=useState("");
   const navigate = useNavigate();
+
   const handleInput=(e)=>{
      let name=e.target.name;
      let value=e.target.value;
      setInput(values=>({...values, [name]:value}));
   }
-  const handleSubmit=()=>{
-   let api="http://localhost:8000/users/userregistration";
-    axios.post(api, input).then((res)=>{
-       
-         message.success("You are succesfully Registered!");
-         navigate(`/login`)
-    })
+
+  const handleImage=(e)=>{
+    console.log(e.target.files[0]);
+    setUploadImage(e.target.files[0])
+}
+
+
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    const formData= new FormData();
+    formData.append("file", uploadImage);
+    formData.append("upload_preset", "JobPortal");
+    formData.append('cloud_name', 'dtpy8tedd');
+
+    const response = await axios.post('https://api.cloudinary.com/v1_1/dtpy8tedd/image/upload', formData); 
+    console.log(response.data.url);
+
+    let api="http://localhost:8000/users/userregistration";
+    const resp1= await axios.post(api, {profilePhoto:response.data.url, ...input});
+
+    alert("data succesfully inserted!!");
+       navigate(`/login`)
   }
   return (
     <div className="signup-container">
@@ -66,12 +69,16 @@ const Signup = () => {
           </Form.Group>
 
           <div className="signup-role">
-            <Form.Check type="radio" label="Student" name="role" />
-            <Form.Check type="radio" label="Recruiter" name="role" />
+            <Form.Check type="radio" name="role"  value={input.student}  onChange={handleInput} />
+            <Form.Label>Student</Form.Label>
+
+            <Form.Check type="radio" name="role" value={input.recruter}  onChange={handleInput} />
+            <Form.Label>Recruiter</Form.Label>
+
             <Form.Group className="mb-3">
               <div style={{display:"flex"}}>
-              <Form.Label >ProfilePhoto</Form.Label>
-              <Form.Control type="file" accept="image/*" />
+              <Form.Label >Profile</Form.Label>
+              <Form.Control type="file" accept="image/*"  onChange={handleImage}/>
               </div>
            
           </Form.Group>
