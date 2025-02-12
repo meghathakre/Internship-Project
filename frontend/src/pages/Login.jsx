@@ -16,20 +16,28 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const handleSubmit = async () => {
     try {
       let api = "http://localhost:8000/users/userlogin";
       const res = await axios.post(api, { email: email, password: password });
+  
       console.log(res.data);
-      // localStorage.setItem("name", res.data[0].name);
-      // localStorage.setItem("email", res.data[0].email);
-      localStorage.setItem("auth-token", res.data.token);
-      localStorage.setItem("uname", res.data.user.username);
+  
+      setTimeout(() => {
+        localStorage.setItem("auth-token", res.data.token);
+        localStorage.setItem("uname", res.data.user.username);
+        dispatch(loginSuccess(res.data.user));
+        window.location.reload();
+        navigate("/home");
+      }, 300);
     } catch (error) {
       console.error("Login failed:", error);
       alert("Something went wrong. Please try again.");
     }
   };
+  
+  
 
   return (
     <>
